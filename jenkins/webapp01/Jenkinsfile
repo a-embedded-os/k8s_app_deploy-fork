@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      GITHUB_ORGANIZATION = "KoolKubernetes"
-      GITHUB_REPO = "cicd"
+      GITHUB_ORGANIZATION = "jeremymv2"
+      GITHUB_REPO = "k8s_cicd"
       REPOSITORY_TAG="${DOCKERHUB_REGISTRY}:${env.BUILD_ID}"
       APP_PATH="jenkins/webapp01"
     }
