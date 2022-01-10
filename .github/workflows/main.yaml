@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
     - 'jenkins/webapp01/src/**'
-    - '!VERSION.json'
+    - '!jenkins/webapp01/package.json'
     - '!CHANGELOG.md'
     - '!jenkins/webapp01/k8s/**'
 
@@ -36,4 +36,4 @@ jobs:
         skip-on-empty: "false"
         skip-version-file: "false"
         tag-prefix: ""
-        version-file: ./VERSION.json
+        version-file: ./jenkins/webapp01/package.json
