@@ -17,7 +17,7 @@ pipeline {
 
       stage ('BUILD') {
           when {
-                branch "master"
+                branch "main"
                 anyOf {
                     changeset "jenkins/webapp01/package.json"
                 }
@@ -30,7 +30,7 @@ pipeline {
 
       stage ('PUBLISH') {
           when {
-                branch "master"
+                branch "main"
                 anyOf {
                     changeset "jenkins/webapp01/package.json"
                 }
@@ -51,7 +51,7 @@ pipeline {
       }
       stage ('DEPLOY') {
           when {
-                branch "master"
+                branch "main"
                 anyOf {
                     changeset "jenkins/webapp01/package.json"
                     changeset "jenkins/webapp01/k8s/**"
