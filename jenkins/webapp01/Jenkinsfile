@@ -1,23 +1,19 @@
 pipeline {
-	agent any
-	environment {
-
-	  	GITHUB_ORGANIZATION = "KoolKubernetes"
+    agent any
+    environment {
+      GITHUB_ORGANIZATION = "KoolKubernetes"
       GITHUB_REPO = "cicd"
-	  	//DOCKERHUB_REGISTRY = "pf9sys/webapp01" This is no more required as it is declared in Jenkins as env. variable
       REPOSITORY_TAG="${DOCKERHUB_REGISTRY}:${env.BUILD_ID}"
-      //APP_PATH="cicd/jenkins/webapp01"
       APP_PATH="jenkins/webapp01"
- 	}
+    }
     stages {
-    	stage ('PREPARATION') {
-        	steps {
+      stage ('PREPARATION') {
+          steps {
                     cleanWs()
                     // git credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
                     git url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
-	        }
-	    }
-
+          }
+      }
 
       stage ('BUILD') {
           when {
@@ -49,14 +45,21 @@ pipeline {
                          	docker.withRegistry( '', registryCredential ) {
                         	appimage.push()
                         	appimage.push('latest')
-                    	}
-              	  	}
-          	}
+                   }
+              	 }
+          }
       }
       stage ('DEPLOY') {
-         	steps {
-             sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
-        	}
+          when {
+                branch "master"
+                anyOf {
+                    changeset "jenkins/webapp01/package.json"
+                    changeset "jenkins/webapp01/k8s/**"
+                }
+          }
+          steps {
+              sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
+          }
         }
       }
 }
