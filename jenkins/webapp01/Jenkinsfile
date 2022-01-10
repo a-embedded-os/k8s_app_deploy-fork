@@ -11,11 +11,10 @@ pipeline {
           steps {
                     cleanWs()
                     git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
-                    //git branch: 'main', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
           }
       }
 
-      stage ('BUILD') {
+      stage ('VERIFY') {
           when {
                 branch "main"
                 anyOf {
@@ -24,13 +23,12 @@ pipeline {
           }
 
           steps {
-            sh "rm -f ${WORKSPACE}/${APP_PATH}/package-lock.json"
             sh "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\""
-            sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
+            sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
           }
       }
 
-      stage ('PUBLISH') {
+      stage ('BUILD') {
           when {
                 branch "main"
                 anyOf {
