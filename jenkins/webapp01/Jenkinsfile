@@ -62,6 +62,7 @@ pipeline {
           }
           steps {
               sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
+              sh 'kubectl rollout restart deploy/p9-react-app'
           }
         }
       }
