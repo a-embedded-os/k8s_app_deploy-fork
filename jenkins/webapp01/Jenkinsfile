@@ -24,6 +24,7 @@ pipeline {
 
           steps {
             sh "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\""
+            sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
             sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
           }
       }
