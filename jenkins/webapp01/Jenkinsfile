@@ -24,7 +24,8 @@ pipeline {
           }
 
           steps {
-             sh 'npm install --prefix ${WORKSPACE}/${APP_PATH}'
+            sh "node -e "console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);"
+            sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
           }
       }
 
