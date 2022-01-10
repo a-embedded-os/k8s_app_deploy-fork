@@ -40,13 +40,15 @@ pipeline {
               registryCredential = 'dockerhub'
           }
           steps {
+              sh"docker builder prune --all --force"
               script {
                   def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${env.BUILD_ID}", "--network host ${WORKSPACE}/${APP_PATH}")
-                         	docker.withRegistry( '', registryCredential ) {
-                        	appimage.push()
-                        	appimage.push('latest')
+                        docker.withRegistry( '', registryCredential ) {
+                        appimage.push()
+                        appimage.push('latest')
                    }
-              	 }
+              }
+              sh"docker system prune -f"
           }
       }
       stage ('DEPLOY') {
