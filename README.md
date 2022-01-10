@@ -1,6 +1,5 @@
 # Jenkins deployment on Platform9 Managed Kubernetes
 
-## Overview
 Jenkins is a well known, widely adopted Continuous Integration platform in enterprises.
 In this pipeline, Jenkins manages a `Deployment` to one of your Platform9 Managed Kubernetes clusters.
 
