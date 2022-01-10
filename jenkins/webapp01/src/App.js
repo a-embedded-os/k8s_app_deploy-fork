@@ -26,5 +26,6 @@ function App() {
     </div>
   );
 }
+
 console.log(packageJson.version);
 export default App;
