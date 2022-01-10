@@ -21,7 +21,7 @@ function App() {
         </a>
       </header>
       <p>
-          The current version of this app is: {packageJson.version}
+          The current version of this app code is: {packageJson.version}
       </p>
     </div>
   );
