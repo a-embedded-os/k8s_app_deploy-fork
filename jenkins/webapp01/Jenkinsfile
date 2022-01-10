@@ -20,12 +20,25 @@ pipeline {
 
 
       stage ('BUILD') {
+          when {
+                branch "master"
+                anyOf {
+                    changeset "jenkins/webapp01/package.json"
+                }
+          }
+
           steps {
              sh 'npm install --prefix ${WORKSPACE}/${APP_PATH}'
           }
       }
 
       stage ('PUBLISH') {
+          when {
+                branch "master"
+                anyOf {
+                    changeset "jenkins/webapp01/package.json"
+                }
+          }
           environment {
               // make sure below credential is stored in Jenkins global credentials.
               registryCredential = 'dockerhub'
@@ -38,11 +51,8 @@ pipeline {
                         	appimage.push('latest')
                     	}
               	  	}
-
           	}
-
       }
-
       stage ('DEPLOY') {
          	steps {
              sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
