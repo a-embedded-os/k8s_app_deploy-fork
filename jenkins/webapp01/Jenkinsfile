@@ -74,7 +74,8 @@ pipeline {
                 cd ${WORKSPACE}/${APP_PATH}
                 for f in k8s/*yaml; do
                   echo "Getting commit SHA for: \$f"
-                  COMMIT_SHA="\$(git log -n 1 --all --pretty=format:%H -- \$f)"
+                  # COMMIT_SHA="\$(git log -n 1 --all --pretty=format:%H -- \$f)"
+                  COMMIT_SHA="FOOBAR"
                   envsubst < \$f | kubectl apply -f -'
                 done
               """
