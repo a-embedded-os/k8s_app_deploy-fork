@@ -12,11 +12,11 @@ spec:
     metadata:
       labels:
         app: p9-react-app
-        version: 0.6.0
+        version: ${CODE_VERSION}
     spec:
       containers:
         - name: p9-react-app
-          image: ${REPOSITORY_TAG}
+          image: ${CODE_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
