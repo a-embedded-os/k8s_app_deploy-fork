@@ -1,6 +1,5 @@
-def CODE_VERSION
-
 pipeline {
+    def CODE_VERSION
     agent any
     environment {
       GITHUB_ORGANIZATION = "jeremymv2"
