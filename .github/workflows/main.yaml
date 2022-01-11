@@ -5,6 +5,8 @@ on:
     branches: [ main ]
     paths:
     - 'jenkins/webapp01/src/**'
+    - 'jenkins/webapp01/dockerfile'
+    - 'jenkins/webapp01/nginx/**'
     - '!jenkins/webapp01/package.json'
     - '!CHANGELOG.md'
     - '!jenkins/webapp01/k8s/**'
