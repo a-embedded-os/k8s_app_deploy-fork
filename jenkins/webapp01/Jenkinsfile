@@ -8,6 +8,7 @@ pipeline {
     GITHUB_REPO = "k8s_cicd"
     APP_PATH = "jenkins/webapp01"
     APP_IMAGE_REPO = "${DOCKERHUB_REGISTRY}"
+    DEPLOYMENT_NAME = "p9-react-app"
   }
 
   stages {
@@ -34,7 +35,7 @@ pipeline {
       steps {
         // Commented out only because we want to speed everything up for demonstration purposes.
         // Uncomment in a real world scenario.
-        // sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
+        // sh "npm install --prefer-offline --no-audit --prefix ${WORKSPACE}/${APP_PATH}"
         // sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
         echo "Would have run verification steps"
       }
@@ -85,7 +86,7 @@ pipeline {
 
       steps {
         sh returnStdout:true, script: """
-          ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO}
+          ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO} ${DEPLOYMENT_NAME}
         """
       }
     }

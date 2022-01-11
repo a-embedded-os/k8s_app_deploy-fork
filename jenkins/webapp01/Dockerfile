@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package*.json /app/
 
-RUN npm install
+RUN npm ci --prefer-offline --no-audit
 
 COPY ./ /app/
 
-RUN npm run build
+# RUN npm run build
 
 FROM nginx:1.17.10-alpine
 
