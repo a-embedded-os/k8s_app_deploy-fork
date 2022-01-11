@@ -14,8 +14,8 @@ pipeline {
     stage ('PREPARATION') {
 
       steps {
-        cleanWs()
-        git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORG}/${GITHUB_REPO}"
+        // cleanWs()
+        // git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORG}/${GITHUB_REPO}"
         script {
           code_version = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"").trim()
           echo "Repository Code Version: ${code_version}"
@@ -47,9 +47,9 @@ pipeline {
 
       when {
         branch "main"
-          allOf {
-            changeset "jenkins/webapp01/package.json"
-          }
+        allOf {
+          changeset "jenkins/webapp01/package.json"
+        }
       }
 
       environment {
