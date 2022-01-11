@@ -36,9 +36,9 @@ pipeline {
       steps {
         // Commented out only because we want to speed everything up for demonstration purposes.
         // Uncomment in a real world scenario.
-
         // sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
         // sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
+        echo "Would have run verification steps"
       }
     }
 
