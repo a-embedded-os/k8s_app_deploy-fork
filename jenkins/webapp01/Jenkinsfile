@@ -1,5 +1,6 @@
+def code_version
+
 pipeline {
-    def CODE_VERSION
     agent any
     environment {
       GITHUB_ORGANIZATION = "jeremymv2"
@@ -10,8 +11,11 @@ pipeline {
     stages {
       stage ('PREPARATION') {
           steps {
-                    cleanWs()
-                    git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
+              cleanWs()
+              git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
+              script {
+                  code_version = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"").trim()
+              }
           }
       }
 
@@ -24,7 +28,6 @@ pipeline {
           }
 
           steps {
-            CODE_VERSION = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"")
             sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
             sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
           }
@@ -44,7 +47,7 @@ pipeline {
           steps {
               sh"docker builder prune --all --force"
               script {
-                  def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${CODE_VERSION}", "--network host ${WORKSPACE}/${APP_PATH}")
+                  def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${code_version}", "--network host ${WORKSPACE}/${APP_PATH}")
                         docker.withRegistry( '', registryCredential ) {
                         appimage.push()
                         appimage.push('latest')
@@ -55,7 +58,7 @@ pipeline {
       }
       stage ('DEPLOY') {
           environment {
-              CODE_VERSION="${CODE_VERSION}"
+              CODE_VERSION=code_version
           }
           when {
                 branch "main"
