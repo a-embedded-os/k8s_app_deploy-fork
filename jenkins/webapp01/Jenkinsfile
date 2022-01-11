@@ -5,8 +5,8 @@ pipeline {
     environment {
       GITHUB_ORGANIZATION = "jeremymv2"
       GITHUB_REPO = "k8s_cicd"
-      REPOSITORY_TAG = "${DOCKERHUB_REGISTRY}:${env.BUILD_ID}"
       APP_PATH = "jenkins/webapp01"
+      APP_IMAGE_REPO = "${DOCKERHUB_REGISTRY}"
       APP_IMAGE_NAME = "webapp01"
     }
     stages {
