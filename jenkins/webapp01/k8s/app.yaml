@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: p9-react-app
+  version: ${CODE_VERSION}
 spec:
   replicas: 2
   selector:
@@ -34,6 +35,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: p9-react-app
+  version: ${CODE_VERSION}
 spec:
   type: LoadBalancer
   selector:
@@ -41,4 +43,3 @@ spec:
   ports:
    - port: 80
      targetPort: 80
-...
