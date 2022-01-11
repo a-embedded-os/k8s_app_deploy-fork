@@ -161,4 +161,3 @@ spec:
       targetPort: 50000
   selector:
     app: jenkins
-...

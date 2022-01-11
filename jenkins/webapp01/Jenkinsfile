@@ -3,7 +3,7 @@ def code_version
 pipeline {
     agent any
     environment {
-      GITHUB_ORGANIZATION = "jeremymv2"
+      GITHUB_ORG = "jeremymv2"
       GITHUB_REPO = "k8s_cicd"
       APP_PATH = "jenkins/webapp01"
       APP_IMAGE_REPO = "${DOCKERHUB_REGISTRY}"
@@ -12,7 +12,7 @@ pipeline {
       stage ('PREPARATION') {
           steps {
               cleanWs()
-              git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
+              git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORG}/${GITHUB_REPO}"
               script {
                   code_version = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"").trim()
                   echo "Repository Code Version: ${code_version}"
@@ -69,8 +69,9 @@ pipeline {
           //      }
           //}
           steps {
-              // sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
-              sh returnStdout:true, script: '${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH}'
+              sh returnStdout:true, script: """
+                ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO}
+              """
           }
         }
       }
