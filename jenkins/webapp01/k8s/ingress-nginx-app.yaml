@@ -11,6 +11,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: p9-react-app
+  annotations:
+    commit_sha: ${COMMIT_SHA}
   namespace: p9-react-app
 spec:
   replicas: 2
