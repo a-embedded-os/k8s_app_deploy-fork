@@ -70,17 +70,7 @@ pipeline {
           //}
           steps {
               // sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
-              sh returnStdout:true, script: """
-                #!/bin/bash
-                cd ${WORKSPACE}/${APP_PATH}
-                for f in k8s/*yaml; do
-                  echo "Getting commit SHA for: \$f";
-                  # COMMIT_SHA="\$(git log -n 1 --all --pretty=format:%H -- \$f)";
-                  export COMMIT_SHA='FOOBAR';
-                  envsubst < \$f | kubectl apply -f -';
-                done;
-              """
-              sh 'kubectl rollout restart deploy/p9-react-app'
+              sh returnStdout:true, script: '${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH}'
           }
         }
       }
