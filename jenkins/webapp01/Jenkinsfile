@@ -1,78 +1,95 @@
 def code_version
 
 pipeline {
-    agent any
-    environment {
-      GITHUB_ORG = "jeremymv2"
-      GITHUB_REPO = "k8s_cicd"
-      APP_PATH = "jenkins/webapp01"
-      APP_IMAGE_REPO = "${DOCKERHUB_REGISTRY}"
-    }
-    stages {
-      stage ('PREPARATION') {
-          steps {
-              cleanWs()
-              git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORG}/${GITHUB_REPO}"
-              script {
-                  code_version = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"").trim()
-                  echo "Repository Code Version: ${code_version}"
-              }
-          }
-      }
+  agent any
 
-      stage ('VERIFY') {
-          when {
-                branch "main"
-                allOf {
-                    changeset "jenkins/webapp01/package.json"
-                }
-          }
+  environment {
+    GITHUB_ORG = "jeremymv2"
+    GITHUB_REPO = "k8s_cicd"
+    APP_PATH = "jenkins/webapp01"
+    APP_IMAGE_REPO = "${DOCKERHUB_REGISTRY}"
+  }
 
-          steps {
-            sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
-            sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
-          }
-      }
+  stages {
+    stage ('PREPARATION') {
 
-      stage ('BUILD') {
-          when {
-                branch "main"
-                allOf {
-                    changeset "jenkins/webapp01/package.json"
-                }
-          }
-          environment {
-              // make sure below credential is stored in Jenkins global credentials.
-              registryCredential = 'dockerhub'
-          }
-          steps {
-              sh"docker builder prune --all --force"
-              script {
-                  def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${code_version}", "--network host ${WORKSPACE}/${APP_PATH}")
-                        docker.withRegistry( '', registryCredential ) {
-                        appimage.push()
-                        appimage.push('latest')
-                   }
-              }
-              sh"docker system prune -f"
-          }
-      }
-      stage ('DEPLOY') {
-          environment {
-              CODE_VERSION="${code_version}"
-          }
-          // when {
-          //      branch "main"
-          //      anyOf {
-          //          changeset "jenkins/webapp01/package.json"
-          //          changeset "jenkins/webapp01/k8s/**"
-          //      }
-          //}
-          steps {
-              sh returnStdout:true, script: """
-                ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO}
-              """
-          }
+      steps {
+        cleanWs()
+        git branch: 'main', credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORG}/${GITHUB_REPO}"
+        script {
+          code_version = sh(returnStdout: true, script: "node -e \"console.log(require('${WORKSPACE}/${APP_PATH}/package.json').version);\"").trim()
+          echo "Repository Code Version: ${code_version}"
         }
       }
+    }
+
+    stage ('VERIFY') {
+      // This Stage is responsible for validating the application (CI)
+
+      when {
+        branch "main"
+        allOf {
+          changeset "jenkins/webapp01/package.json"
+        }
+      }
+
+      steps {
+        // Commented out only because we want to speed everything up for demonstration purposes.
+        // Uncomment in a real world scenario.
+
+        // sh "npm install --prefix ${WORKSPACE}/${APP_PATH}"
+        // sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
+      }
+    }
+
+    stage ('BUILD') {
+      // This Stage is responsible for building and deploying the docker image.
+
+      when {
+        branch "main"
+          allOf {
+            changeset "jenkins/webapp01/package.json"
+          }
+      }
+
+      environment {
+        // make sure below credential is stored in Jenkins global credentials.
+        registryCredential = 'dockerhub'
+      }
+
+      steps {
+        script {
+          def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${code_version}", "--network host ${WORKSPACE}/${APP_PATH}")
+            docker.withRegistry( '', registryCredential ) {
+              appimage.push()
+              appimage.push('latest')
+            }
+          }
+        sh "docker system prune -f"
+      }
+    }
+
+    stage ('DEPLOY') {
+      // This Stage is responsible for applying the application yaml files into K8s.
+
+      when {
+        branch "main"
+        anyOf {
+          changeset "jenkins/webapp01/package.json"
+          changeset "jenkins/webapp01/k8s/**"
+        }
+      }
+
+      environment {
+        CODE_VERSION="${code_version}"
+      }
+
+
+      steps {
+        sh returnStdout:true, script: """
+          ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO}
+        """
+      }
+    }
+  }
 }
