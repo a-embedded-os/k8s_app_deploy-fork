@@ -32,7 +32,7 @@ jobs:
         git-user-email: changelog_bump@github.actions.com
         git-user-name: "ChangelogVersionBump"
         github-token: "${{ secrets.TOKEN }}"
-        output-file: CHANGELOG.md
+        output-file: ./jenkins/webapp01/CHANGELOG.md
         release-count: "50"
         skip-commit: "false"
         skip-on-empty: "false"
