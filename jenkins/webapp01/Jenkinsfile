@@ -77,7 +77,7 @@ pipeline {
                   echo "Getting commit SHA for: \$f";
                   # COMMIT_SHA="\$(git log -n 1 --all --pretty=format:%H -- \$f)";
                   export COMMIT_SHA='FOOBAR';
-                  # envsubst < \$f | kubectl apply -f -';
+                  envsubst < \$f | kubectl apply -f -';
                 done;
               """
               sh 'kubectl rollout restart deploy/p9-react-app'
