@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: p9-react-app
-          image: ${CODE_VERSION}
+          image: ${APP_IMAGE_NAME}:${CODE_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
