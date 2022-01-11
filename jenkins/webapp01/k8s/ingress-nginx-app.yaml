@@ -21,7 +21,7 @@ spec:
     metadata:
       labels:
         app: p9-react-app
-        version: 0.6.0
+        version: ${CODE_VERSION}
     spec:
       containers:
         - name: p9-react-app
@@ -58,4 +58,3 @@ spec:
           backend:
             serviceName: p9-react-app
             servicePort: 80
-...
