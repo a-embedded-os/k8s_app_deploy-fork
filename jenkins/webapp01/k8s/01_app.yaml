@@ -21,7 +21,7 @@ spec:
           image: ${APP_IMAGE_REPO}:${CODE_VERSION}
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
       restartPolicy: Always
       affinity:
         nodeAffinity:
@@ -44,4 +44,4 @@ spec:
     app: p9-react-app
   ports:
    - port: 80
-     targetPort: 80
+     targetPort: 8080
