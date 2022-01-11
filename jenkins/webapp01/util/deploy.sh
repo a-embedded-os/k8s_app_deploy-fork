@@ -11,4 +11,4 @@ for f in k8s/*yaml; do
   envsubst < "$f" | kubectl apply -f -
 done
 
-kubectl rollout restart deploy/p9-react-app
+kubectl rollout restart deploy/$4
