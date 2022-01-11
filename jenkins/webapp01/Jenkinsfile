@@ -61,13 +61,13 @@ pipeline {
           environment {
               CODE_VERSION="${code_version}"
           }
-          when {
-                branch "main"
-                anyOf {
-                    changeset "jenkins/webapp01/package.json"
-                    changeset "jenkins/webapp01/k8s/**"
-                }
-          }
+          // when {
+          //      branch "main"
+          //      anyOf {
+          //          changeset "jenkins/webapp01/package.json"
+          //          changeset "jenkins/webapp01/k8s/**"
+          //      }
+          //}
           steps {
               // sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
               sh """
