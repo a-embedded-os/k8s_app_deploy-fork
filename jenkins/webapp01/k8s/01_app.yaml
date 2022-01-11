@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: p9-react-app
   annotations:
-    commit_sha: ${COMMIT_SHA}
+    commit_sha: ${GITHUB_SHA_URL}
 spec:
   replicas: 2
   selector:
@@ -37,7 +37,7 @@ apiVersion: v1
 metadata:
   name: p9-react-app
   annotations:
-    commit_sha: ${COMMIT_SHA}
+    commit_sha: ${GITHUB_SHA_URL}
 spec:
   type: LoadBalancer
   selector:
