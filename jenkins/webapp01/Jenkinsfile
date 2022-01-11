@@ -58,7 +58,7 @@ pipeline {
       }
       stage ('DEPLOY') {
           environment {
-              CODE_VERSION=code_version
+              CODE_VERSION="${code_version}"
           }
           when {
                 branch "main"
