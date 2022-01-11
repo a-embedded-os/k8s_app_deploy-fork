@@ -9,20 +9,20 @@ Jenkins into your PF9 managed Kubernetes environment.
 
 The Jenkins Pipeline has four stages: Preparation, Verify, Build and Deploy.
 
-Preparation:
+**Preparation*:
 - Here we simply extract the application version from `package.json` and assign it to a variable for use
 in other stages.
 
-Verify:
+*Verify*:
 - This is fundamental step to all CI/CD pipelines. Here the application's unit, lint, and style tests
 are executed. All these tests should be quick executing should not be long running, such as integration tests
 which should be run later in the pipeline.
 
-Build:
+*Build*:
 - Here the pipeline builds a new container image of the application, tags it with the new version and publishes to
 the image registry.
 
-Deploy:
+*Deploy*:
 - As you might have guessed, this is the stage where the K8s manifests are applied into the PF9 managed kubernetes environment.
 
 
