@@ -9,11 +9,11 @@ few moments to read these and keep them in mind as you design your own pipelines
 
 - Any change to the application code in the SCM repository should trigger a new image build.
 - The change to the application code could ideally trigger an automated bump of the application version.
-- Tag the SCM repository every time the application version changes.
-- Following an application image build, tag the image with `latest` and the new repo tag.
-- Always deploy the latest image into a Test Kubernetes environment.
+- Automation should tag the SCM repository every time the application version changes, and include the changes in a Changelog.
+- Following an application image build, also tag the container image with `latest` and the new repo tag.
+- Automation should then deploy the latest image into a Test Kubernetes environment.
 - Keep the application's Kubernetes manifests alongside the application code in the same SCM repo.
-- Any change to these Kubernetes manifests should not in and of themselves trigger a new image build.
+- Any change to these Kubernetes manifests should not in and of themselves trigger a new image build if nothing in the application source changed.
 - A change to the Kubernetes manifests should always trigger a new deployment into the Test environment.
 - Whilst the application code is versioned via SCM repo tags, the Kubernetes manifests could have their
 own change tracking via SCM commit SHA recorded as an annotation in each resource.
