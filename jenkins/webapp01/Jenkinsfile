@@ -37,7 +37,7 @@ pipeline {
         // Uncomment in a real world scenario.
         // sh "npm install --prefer-offline --no-audit --prefix ${WORKSPACE}/${APP_PATH}"
         // sh "CI=true npm --prefix ${WORKSPACE}/${APP_PATH} test -- --coverage"
-        echo "Would have run verification steps"
+        echo "Would have run verification steps if not for demo environment."
       }
     }
 
