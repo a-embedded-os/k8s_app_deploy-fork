@@ -7,6 +7,8 @@ Jenkins into your PF9 managed Kubernetes environment.
 
 ## Pipeline Overview
 
+![stages](images/stages.png)
+
 The Jenkins Pipeline has four stages: Preparation, Verify, Build and Deploy.
 
 **Preparation**:
