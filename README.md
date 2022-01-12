@@ -22,3 +22,7 @@ releases of an arbitrary image version into a Production environment. Ideally, t
 version should be stored in SCM for visibility.
 - A deployment into Production should be tightly coupled or even triggered by a new SCM release being
 created for a given SCM tag.
+
+## Examples
+
+- [jenkins](jenkins/README.md)
