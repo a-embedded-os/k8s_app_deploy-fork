@@ -6,7 +6,7 @@ metadata:
   annotations:
     commit_sha: ${GITHUB_SHA_URL}
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ${DEPLOYMENT_NAME}
