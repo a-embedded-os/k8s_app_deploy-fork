@@ -20,3 +20,5 @@ own change tracking via SCM commit SHA recorded as an annotation in each resourc
 - Following validation of the Test environment, there should be a pipeline to allow for selective
 releases of an arbitrary image version into a Production environment. Ideally, the control of which
 version should be stored in SCM for visibility.
+- A deployment into Production should be tightly coupled or even triggered by a new SCM release being
+created for a given SCM tag.
