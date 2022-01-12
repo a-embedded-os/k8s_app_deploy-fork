@@ -59,12 +59,11 @@ pipeline {
       steps {
         script {
           def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${code_version}", "--network host ${WORKSPACE}/${APP_PATH}")
-            docker.withRegistry( '', registryCredential ) {
-              appimage.push()
-              appimage.push('latest')
-            }
+          docker.withRegistry( '', registryCredential ) {
+            appimage.push()
+            appimage.push('latest')
           }
-        sh "docker system prune -f"
+        }
       }
     }
 
