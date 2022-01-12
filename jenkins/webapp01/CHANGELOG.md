@@ -1,3 +1,7 @@
+## [0.0.34](https://github.com/jeremymv2/k8s_cicd/compare/0.0.33...0.0.34) (2022-01-12)
+
+
+
 ## [0.0.33](https://github.com/jeremymv2/k8s_cicd/compare/0.0.32...0.0.33) (2022-01-12)
 
 
