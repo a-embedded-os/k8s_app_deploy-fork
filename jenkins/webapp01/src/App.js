@@ -12,7 +12,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-        Howdy PF9!
+        Howdy Trimble!
         </p>
         <a
           className="App-link"
