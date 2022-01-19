@@ -11,6 +11,7 @@ spec:
   selector:
     matchLabels:
       app: ${DEPLOYMENT_NAME}
+      version: ${CODE_VERSION}
   template:
     metadata:
       labels:
