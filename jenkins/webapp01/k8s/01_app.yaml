@@ -5,6 +5,7 @@ metadata:
   name: ${DEPLOYMENT_NAME}
   annotations:
     commit_sha: ${GITHUB_SHA_URL}
+    version: ${CODE_VERSION}
 spec:
   replicas: 3
   selector:
@@ -38,7 +39,7 @@ metadata:
   name: ${DEPLOYMENT_NAME}
   annotations:
     commit_sha: ${GITHUB_SHA_URL}
-    app_version: ${CODE_VERSION}
+    version: ${CODE_VERSION}
 spec:
   type: LoadBalancer
   selector:
