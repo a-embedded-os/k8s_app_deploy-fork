@@ -16,13 +16,19 @@ on:
 
 jobs:
   changelog_prerelease:
-    name: Update Changelog For Prerelease
+    name: Bump and Update Changelog
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           ref: main
+      - name: Get latest release
+        id: get_release
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: ${{ github.repository }}
+          excludes: prerelease, draft
       - name: Update Changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
@@ -31,36 +37,31 @@ jobs:
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
+          author: true
           unreleased: true
-          addSections: '{"documentation":{"prefix":" **Documentation:**","labels":["documentation"]}}'
+          headerLabel: ""
+          sinceTag:  ${{ steps.get_release.outputs.release }}
       - name: move Changelog
-        run: mv -f CHANGELOG.md jenkins/webapp01/CHANGELOG.md
+        run: |
+             cat CHANGELOG.md jenkins/webapp01/CHANGELOG.md > CHANGELOG_NEW.md
+             mv CHANGELOG_NEW.md jenkins/webapp01/CHANGELOG.md
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update Changelog
           commit_user_name: "ChangeLogUpdate"
           commit_user_email: "changelog_bump@github.actions.com"
           file_pattern: jenkins/webapp01/CHANGELOG.md
-  bump:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out repository under $GITHUB_WORKSPACE, so the job can access it
-    - uses: actions/checkout@v2
-
-    - name: "Version Bump Action"
-      # https://github.com/TriPSs/conventional-changelog-action
-      uses: TriPSs/conventional-changelog-action@v3.10.0
-      with:
-        git-message: "chore(bump): {version}"
-        git-user-email: changelog_bump@github.actions.com
-        git-user-name: "VersionBumpAndTag"
-        github-token: "${{ secrets.TOKEN }}"
-        output-file: false
-        skip-commit: false
-        skip-on-empty: false
-        skip-version-file: false
-        tag-prefix: ""
-        version-file: ./jenkins/webapp01/package.json
+      - name: "Version Bump Action"
+	# https://github.com/TriPSs/conventional-changelog-action
+	uses: TriPSs/conventional-changelog-action@v3.10.0
+	with:
+	  git-message: "chore(bump): {version}"
+	  git-user-email: changelog_bump@github.actions.com
+	  git-user-name: "VersionBumpAndTag"
+	  github-token: "${{ secrets.TOKEN }}"
+	  output-file: false
+	  skip-commit: false
+	  skip-on-empty: false
+	  skip-version-file: false
+	  tag-prefix: ""
+	  version-file: ./jenkins/webapp01/package.json
