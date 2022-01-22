@@ -30,7 +30,7 @@ jobs:
       with:
         git-message: "chore(bump): {version}"
         git-user-email: changelog_bump@github.actions.com
-        git-user-name: "ChangelogVersionBump"
+        git-user-name: "VersionBumpAndTag"
         github-token: "${{ secrets.TOKEN }}"
         output-file: false
         skip-commit: false

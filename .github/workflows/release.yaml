@@ -23,7 +23,7 @@ jobs:
       with:
         git-message: "chore(release): {version}"
         git-user-email: changelog_bump@github.actions.com
-        git-user-name: "ChangelogVersionBump"
+        git-user-name: "ReleaseAndChangelog"
         github-token: "${{ secrets.TOKEN }}"
         output-file: ./jenkins/webapp01/CHANGELOG.md
         release-count: 50
