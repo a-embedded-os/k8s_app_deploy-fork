@@ -85,7 +85,7 @@ pipeline {
 
       steps {
         sh returnStdout:true, script: """
-          ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${WORKSPACE}/${APP_PATH} ${GITHUB_ORG} ${GITHUB_REPO} ${DEPLOYMENT_NAME}
+          ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${DEPLOYMENT_NAME}
         """
       }
     }

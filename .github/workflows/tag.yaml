@@ -42,8 +42,7 @@ jobs:
           sinceTag:  ${{ steps.get_release.outputs.release }}
       - name: move Changelog
         run: |
-             cat CHANGELOG.md jenkins/webapp01/CHANGELOG.md > CHANGELOG_NEW.md
-             mv CHANGELOG_NEW.md jenkins/webapp01/CHANGELOG.md
+             mv CHANGELOG.md jenkins/webapp01/CHANGELOG.md
              rm -f CHANGELOG.md
       - name: auto commit
         uses: stefanzweifel/git-auto-commit-action@v4
