@@ -26,7 +26,7 @@ jobs:
 
     - name: "Version Bump Action"
       # https://github.com/TriPSs/conventional-changelog-action
-      uses: TriPSs/conventional-changelog-action@v3
+      uses: TriPSs/conventional-changelog-action@v3.10.0
       with:
         git-message: "chore(bump): {version}"
         git-user-email: changelog_bump@github.actions.com
