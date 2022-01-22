@@ -1,4 +1,4 @@
-name: ReleaseActions
+name: ReleaseAction
 
 on:
   release:
