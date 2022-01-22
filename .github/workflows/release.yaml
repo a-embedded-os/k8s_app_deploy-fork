@@ -1,4 +1,4 @@
-name: BumpActions
+name: ReleaseActions
 
 on:
   release:
