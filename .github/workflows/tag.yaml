@@ -15,6 +15,30 @@ on:
   workflow_dispatch:
 
 jobs:
+  changelog_prerelease:
+    name: Update Changelog For Prerelease
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Update Changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        with:
+          token: "${{ secrets.TOKEN }}"
+          issues: true
+          issuesWoLabels: true
+          pullRequests: true
+          prWoLabels: true
+          unreleased: true
+          addSections: '{"documentation":{"prefix":" **Documentation:**","labels":["documentation"]}}'
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update Changelog
+          commit_user_name: "ChangeLogUpdate"
+          commit_user_email: "changelog_bump@github.actions.com"
+          file_pattern: jenkins/webapp01/CHANGELOG.md
   bump:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
