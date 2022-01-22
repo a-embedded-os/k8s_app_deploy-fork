@@ -38,7 +38,7 @@ jobs:
           pullRequests: true
           prWoLabels: true
           usernamesAsGithubLogins: true
-          headerLabel: "# Changes since release ${{ steps.get_release.outputs.release }}"
+          headerLabel: "# Changes since last release [${{ steps.get_release.outputs.release }}]"
           sinceTag:  ${{ steps.get_release.outputs.release }}
       - name: move Changelog
         run: |
