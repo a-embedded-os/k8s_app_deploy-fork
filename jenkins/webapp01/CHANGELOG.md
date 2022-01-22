@@ -1,4 +1,4 @@
-Changes since release 0.0.41
+# Changes since release 0.0.41
 
 ## [0.0.44](https://github.com/jeremymv2/k8s_cicd/tree/0.0.44) (2022-01-22)
 
