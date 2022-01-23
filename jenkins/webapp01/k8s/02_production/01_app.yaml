@@ -23,6 +23,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: K8S_CONTEXT
+              value: "Production"
       restartPolicy: Always
       affinity:
         nodeAffinity:
