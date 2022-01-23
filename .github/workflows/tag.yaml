@@ -23,34 +23,34 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Get latest release
-        id: get_release
-        uses: pozetroninc/github-action-get-latest-release@master
-        with:
-          repository: ${{ github.repository }}
-          excludes: prerelease, draft
-      - name: Update Changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
-        with:
-          token: "${{ secrets.TOKEN }}"
-          issues: true
-          issuesWoLabels: true
-          pullRequests: true
-          prWoLabels: true
-          usernamesAsGithubLogins: true
-          headerLabel: "# Changes since last release [${{ steps.get_release.outputs.release }}]"
-          sinceTag:  ${{ steps.get_release.outputs.release }}
-      - name: move Changelog
-        run: |
-             mv CHANGELOG.md jenkins/webapp01/CHANGELOG.md
-             rm -f CHANGELOG.md
-      - name: auto commit
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update Changelog
-          commit_user_name: "ChangeLogUpdate"
-          commit_user_email: "changelog_bump@github.actions.com"
-          file_pattern: jenkins/webapp01/CHANGELOG.md
+#      - name: Get latest release
+#        id: get_release
+#        uses: pozetroninc/github-action-get-latest-release@master
+#        with:
+#          repository: ${{ github.repository }}
+#          excludes: prerelease, draft
+#      - name: Update Changelog
+#        uses: heinrichreimer/github-changelog-generator-action@v2.3
+#        with:
+#          token: "${{ secrets.TOKEN }}"
+#          issues: true
+#          issuesWoLabels: true
+#          pullRequests: true
+#          prWoLabels: true
+#          usernamesAsGithubLogins: true
+#          headerLabel: "# Changes since last release [${{ steps.get_release.outputs.release }}]"
+#          sinceTag:  ${{ steps.get_release.outputs.release }}
+#      - name: move Changelog
+#        run: |
+#             mv CHANGELOG.md jenkins/webapp01/CHANGELOG.md
+#             rm -f CHANGELOG.md
+#      - name: auto commit
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: Update Changelog
+#          commit_user_name: "ChangeLogUpdate"
+#          commit_user_email: "changelog_bump@github.actions.com"
+#          file_pattern: jenkins/webapp01/CHANGELOG.md
       - name: "Version Bump Action"
         uses: TriPSs/conventional-changelog-action@v3.10.0
         with:

@@ -18,11 +18,11 @@ function maybe_deploy {
     GITHUB_SHA_URL="https://github.com/$(owner_repo)/commit/$COMMIT_SHA"
     # shellcheck disable=1091
     [[ -f $(dirname "$f")/.env ]] && source "$(dirname "$f")/.env"
-    envsubst < "$f" | kubectl diff -f -
+    envsubst < "$f" | kubectl diff -f - 2>&1
     if [[ "$?" -eq 1 ]]; then
       echo "[INFO] Differences exist between local and online configuration. Applying local config.."
-      envsubst < "$f" | kubectl apply -f -
-      kubectl rollout restart deploy/"$1"
+      envsubst < "$f" | kubectl apply -f - 2>&1
+      kubectl rollout restart deploy/"$1" 2>&1
     elif [[ "$?" -gt 1 ]]; then
       echo "[ERROR] Diff between local and online configuration failed!"
     else

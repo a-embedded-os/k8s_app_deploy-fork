@@ -1,0 +1,50 @@
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${DEPLOYMENT_NAME}
+  annotations:
+    commit_sha: ${GITHUB_SHA_URL}
+    version: ${CODE_VERSION}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${DEPLOYMENT_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${DEPLOYMENT_NAME}
+        version: ${CODE_VERSION}
+    spec:
+      containers:
+        - name: ${DEPLOYMENT_NAME}
+          image: ${APP_IMAGE_REPO}:${CODE_VERSION}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: jenkins
+                  operator: Exists
+                  values:
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ${DEPLOYMENT_NAME}
+  annotations:
+    commit_sha: ${GITHUB_SHA_URL}
+    version: ${CODE_VERSION}
+spec:
+  type: LoadBalancer
+  selector:
+    app: ${DEPLOYMENT_NAME}
+    version: ${CODE_VERSION}
+  ports:
+   - port: 80
+     targetPort: 8080
