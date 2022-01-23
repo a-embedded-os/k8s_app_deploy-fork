@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 export COMMIT_SHA GITHUB_SHA_URL
 
 SCRIPTPATH="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1; pwd -P)"
