@@ -6,8 +6,6 @@ import logo from './k8logo.png';
 import './App.css';
 import packageJson from '../package.json';
 
-const { K8S_CONTEXT } = process.env.K8S_CONTEXT
-
 function App() {
   return (
     <div className="App">
@@ -26,7 +24,7 @@ function App() {
         </a>
       </header>
       <p>
-          This version of the application is: {packageJson.version} running in Environment: {K8S_CONTEXT}
+          This version of the application is: {packageJson.version}
       </p>
     </div>
   );
