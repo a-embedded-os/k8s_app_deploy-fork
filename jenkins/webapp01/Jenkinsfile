@@ -80,13 +80,14 @@ pipeline {
 
       environment {
         CODE_VERSION="${code_version}"
+        KUBECONFIG_FILEPATH = credentials('k8s-kubeconfig')
       }
 
 
       steps {
         script {
           final String out = sh returnStdout:true, script: """
-            ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${DEPLOYMENT_NAME}
+            ${WORKSPACE}/${APP_PATH}/util/deploy.sh ${DEPLOYMENT_NAME} ${KUBECONFIG_FILEPATH}
           """
           echo out
         }
