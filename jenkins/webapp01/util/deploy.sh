@@ -30,10 +30,10 @@ function maybe_deploy {
       echo "============"
       source "$env_dir/.env"
     fi
-    envsubst < "$f" | kubectl diff --kubeconfig "$2" --context "$K8S_CONTEXT" -f - 2>&1
+    envsubst < "$f" | kubectl diff --kubeconfig "$KUBECONFIG_FILEPATH" --context "$K8S_CONTEXT" -f - 2>&1
     if [[ "$?" -eq 1 ]]; then
       echo "[INFO] Differences exist between local and online configuration. APPLYING!"
-      envsubst < "$f" | kubectl apply --kubeconfig "$2" --context "$K8S_CONTEXT" -f - 2>&1
+      envsubst < "$f" | kubectl apply --kubeconfig "$KUBECONFIG_FILEPATH" --context "$K8S_CONTEXT" -f - 2>&1
       echo "[INFO] Running a rollout restart for Deployment."
       kubectl rollout restart deploy/"$1" --kubeconfig "$KUBECONFIG_FILEPATH" --context "$K8S_CONTEXT" 2>&1
     elif [[ "$?" -gt 1 ]]; then
