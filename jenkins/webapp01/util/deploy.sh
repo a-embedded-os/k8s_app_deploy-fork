@@ -13,9 +13,12 @@ function maybe_deploy {
   for f in "$SCRIPTPATH"/../k8s/*/*yaml; do
     env_dir="$(dirname "$f")"
     echo ""
+    echo ""
+    echo "========================================"
     echo "========================================"
     echo "| Processing manifests in $env_dir"
     echo "| Getting commit SHA for: $f"
+    echo "========================================"
     echo "========================================"
     echo ""
     COMMIT_SHA=$(git log -n 1 --all --pretty=format:%H -- "$f")

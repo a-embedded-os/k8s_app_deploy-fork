@@ -24,7 +24,7 @@ function App() {
         </a>
       </header>
       <p>
-          This version of the application is: {packageJson.version}
+          This version of the application is: {packageJson.version} running in Environment: {process.env.K8S_CONTEXT}
       </p>
     </div>
   );
