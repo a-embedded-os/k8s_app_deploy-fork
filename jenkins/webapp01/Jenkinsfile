@@ -86,7 +86,7 @@ pipeline {
 
       steps {
         script {
-          final String out = sh returnStdout:true, script: '${WORKSPACE}/${APP_PATH}/util/deploy.sh ${DEPLOYMENT_NAME} $KUBECONFIG_FILEPATH'
+          final String out = sh(returnStdout: true, script: "${WORKSPACE}/${APP_PATH}/util/deploy.sh ${DEPLOYMENT_NAME}")
           echo out
         }
       }
