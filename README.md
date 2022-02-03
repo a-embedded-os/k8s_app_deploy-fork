@@ -1,4 +1,4 @@
-# Continuous Integration and Deployment with P9 Managed Kubernetes
+# Continuous Integration and Deployment with PF9 Managed Kubernetes
 
 As the topic of CICD has a long [history](https://martinfowler.com/tags/continuous%20delivery.html)
 we will not go into too much depth on it; you can read further on your own. However, we will hi-light
