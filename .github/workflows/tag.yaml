@@ -58,7 +58,7 @@ jobs:
           git-user-email: changelog_bump@github.actions.com
           git-user-name: "VersionBumpAndTag"
           github-token: "${{ secrets.TOKEN }}"
-          output-file: false
+          output-file: ./jenkins/webapp01/CHANGELOG.md
           skip-commit: false
           skip-on-empty: false
           skip-version-file: false
