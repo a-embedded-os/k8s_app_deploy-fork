@@ -1,6 +1,6 @@
 // App.js
 //
-// This should fix fake bug: #1
+// This should fix fake bug..
 
 import React from 'react';
 import logo from './k8logo.png';
