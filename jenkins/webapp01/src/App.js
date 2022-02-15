@@ -1,5 +1,6 @@
 // App.js
 //
+// Adding feature xyz..
 // This should fix fake bug..
 
 import React from 'react';
