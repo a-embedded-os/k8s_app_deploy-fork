@@ -1,3 +1,12 @@
+## [0.0.58](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.57...0.0.58) (2022-02-15)
+
+
+### Bug Fixes
+
+* fixes a fake bug ([cb94730](https://github.com/Platform9-Community/k8s_app_deploy/commit/cb94730c77f0379941b7250de9b59fc99e1983d3))
+
+
+
 ## [0.0.57](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.56...0.0.57) (2022-02-15)
 
 
@@ -11,10 +20,6 @@
 
 
 ## [0.0.54](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.53...0.0.54) (2022-02-03)
-
-
-
-## [0.0.53](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.52...0.0.53) (2022-01-25)
 
 
 
