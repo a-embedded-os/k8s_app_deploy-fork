@@ -1,0 +1,38 @@
+name: BumpAction
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'jenkins/webapp01/src/**'
+    - 'jenkins/webapp01/dockerfile'
+    - 'jenkins/webapp01/nginx/**'
+    - '!jenkins/webapp01/package.json'
+    - '!CHANGELOG.md'
+    - '!jenkins/webapp01/k8s/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  changelog_prerelease:
+    name: Bump and Update Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: "Version Bump Action"
+        uses: TriPSs/conventional-changelog-action@v3.10.0
+        with:
+          git-message: "chore(bump): {version}"
+          git-user-email: changelog_bump@github.actions.com
+          git-user-name: "VersionBumpAndTag"
+          github-token: "${{ secrets.TOKEN }}"
+          output-file: ./jenkins/webapp01/CHANGELOG.md
+          skip-commit: false
+          skip-on-empty: false
+          skip-version-file: false
+          tag-prefix: ""
+          version-file: ./jenkins/webapp01/package.json
