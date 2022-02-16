@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.1.1...0.2.0) (2022-02-16)
+
+
+### Features
+
+* feature 1 is complete ([a758858](https://github.com/Platform9-Community/k8s_app_deploy/commit/a75885813360813ffa597f5a1fa6094ef6311b77))
+
+
+
 ## [0.1.1](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.1.0...0.1.1) (2022-02-15)
 
 
@@ -26,10 +35,6 @@
 
 
 ## [0.0.57](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.56...0.0.57) (2022-02-15)
-
-
-
-## [0.0.56](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.55...0.0.56) (2022-02-15)
 
 
 
