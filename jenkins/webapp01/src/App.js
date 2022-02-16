@@ -1,5 +1,6 @@
 // App.js
 //
+// Feature 1
 // Fixes minor fake bug
 // Adding feature xyz..
 // This should fix fake bug..
