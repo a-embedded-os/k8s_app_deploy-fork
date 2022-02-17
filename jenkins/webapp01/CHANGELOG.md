@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.3.0...0.3.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* welcome message ([e85a07d](https://github.com/Platform9-Community/k8s_app_deploy/commit/e85a07dca5bbeb7e87f942055dfdb8aa8e17e575))
+
+
+
 # [0.3.0](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.2.1...0.3.0) (2022-02-17)
 
 
@@ -36,15 +45,6 @@
 ### Bug Fixes
 
 * minor fake bug ([5637c00](https://github.com/Platform9-Community/k8s_app_deploy/commit/5637c0076a93a3373800e2f4b36f71014dd61191))
-
-
-
-# [0.1.0](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.58...0.1.0) (2022-02-15)
-
-
-### Features
-
-* adds xyz feature ([afc98ae](https://github.com/Platform9-Community/k8s_app_deploy/commit/afc98aea692fe8393e6b2c2e0afe451f8cc7cb17))
 
 
 
