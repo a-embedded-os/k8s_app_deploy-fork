@@ -1,3 +1,17 @@
+# [0.3.0](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.2.1...0.3.0) (2022-02-17)
+
+
+### Bug Fixes
+
+* prep for fnight ([e1eaef1](https://github.com/Platform9-Community/k8s_app_deploy/commit/e1eaef14317ae5918996d86d6ee01c0604148cb3))
+
+
+### Features
+
+* prod replicas 2 ([c9463cf](https://github.com/Platform9-Community/k8s_app_deploy/commit/c9463cfc61ef9072a62da9a0d4228dcfd3283454))
+
+
+
 ## [0.2.1](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.2.0...0.2.1) (2022-02-16)
 
 
@@ -31,15 +45,6 @@
 ### Features
 
 * adds xyz feature ([afc98ae](https://github.com/Platform9-Community/k8s_app_deploy/commit/afc98aea692fe8393e6b2c2e0afe451f8cc7cb17))
-
-
-
-## [0.0.58](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.0.57...0.0.58) (2022-02-15)
-
-
-### Bug Fixes
-
-* fixes a fake bug ([cb94730](https://github.com/Platform9-Community/k8s_app_deploy/commit/cb94730c77f0379941b7250de9b59fc99e1983d3))
 
 
 
