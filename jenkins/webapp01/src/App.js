@@ -1,6 +1,6 @@
 // App.js
 //
-// bug fix 2
+// fix it
 
 import React from 'react';
 import logo from './k8logo.png';
