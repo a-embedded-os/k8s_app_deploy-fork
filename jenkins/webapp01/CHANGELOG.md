@@ -1,3 +1,7 @@
+## [0.3.3](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.3.2...0.3.3) (2022-03-29)
+
+
+
 ## [0.3.2](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.3.1...0.3.2) (2022-03-29)
 
 
@@ -31,15 +35,6 @@
 ### Bug Fixes
 
 * bug fix 2 ([fc1e9fa](https://github.com/Platform9-Community/k8s_app_deploy/commit/fc1e9faa4f865ee8f314550cfb0b77678ed79bee))
-
-
-
-# [0.2.0](https://github.com/Platform9-Community/k8s_app_deploy/compare/0.1.1...0.2.0) (2022-02-16)
-
-
-### Features
-
-* feature 1 is complete ([a758858](https://github.com/Platform9-Community/k8s_app_deploy/commit/a75885813360813ffa597f5a1fa6094ef6311b77))
 
 
 
