@@ -13,7 +13,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-        Howdy Platform9!
+        Hello Dish!
         </p>
         <a
           className="App-link"
